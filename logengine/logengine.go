@@ -26,7 +26,10 @@ import "io"
 
 // engine log definition
 type LoggerEngine interface {
+	// SetOutput to set the target output.
+	// Ex: std out, file etc
 	SetOutput(io.WriteCloser)
+	// actual print the log message
 	Printf(string, ...any)
 }
 

@@ -28,7 +28,7 @@ import (
 	"strconv"
 	"time"
 
-  "github.com/bismarkanes/pow-log/logengine"
+	"github.com/bismarkanes/pow-log/logengine"
 )
 
 const (
@@ -44,20 +44,32 @@ const (
 
 // Logger for logging things
 type Logger interface {
+	// Info print log [info]
 	Info(formatMsg string, args ...any)
+	// Warn print log [warning]
 	Warn(formatMsg string, args ...any)
+	// Warn print log [error]
 	Error(formatMsg string, args ...any)
+	// Warn print log with specific label
 	Label(formatMsg, label string, args ...any)
+	// Warn print log error with
 	Errorn(formatMsg string, args ...any)
+	// Warn print log [info] with additional tag. Example [info] [USERS]
+	// Note that the structure will have an additional delimiter for the tag
 	Infot(formatMsg, tag string, args ...any)
 }
 
 type logger struct {
+	// whether to print log message to console
 	useLogConsole bool
+	// whehter to print log message to another
 	useLogCustom  bool
 	loggerCustom  logengine.LoggerEngine // custom log engine
 	loggerConsole logengine.LoggerEngine // console log engine
-	formatTime    string
+	// time formatter
+	formatTime string
+	// logCustomOpen is callback to open i/o and have interface io.WriteCloser
+	// to close the i/o
 	logCustomOpen func() (io.WriteCloser, error)
 }
 

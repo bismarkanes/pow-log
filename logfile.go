@@ -38,7 +38,7 @@ func (lf *loggerFile) open() (io.WriteCloser, error) {
 	return os.OpenFile(lf.filename, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 }
 
-// NewCustomLogFile custom logger engine log to local file
+// NewCustomLogFile custom logger engine log additional to local file
 func NewCustomLogFile(filename string, useLogConsole, useLogFile bool, newEngine logengine.NewLoggerEngine) Logger {
 	var engineFile logengine.LoggerEngine
 	var engineConsole logengine.LoggerEngine
@@ -64,7 +64,7 @@ func NewCustomLogFile(filename string, useLogConsole, useLogFile bool, newEngine
 	return &lf
 }
 
-// NewLogFile default logger to local file
+// NewLogFile default logger to local file using build in go log
 func NewLogFile(filename string, isLogConsole, isLogFile bool) Logger {
 	return NewCustomLogFile(
 		filename,
